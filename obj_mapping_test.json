@@ -1,0 +1,2873 @@
+{
+  "UPS": {
+    "UPS_RATING": {
+      "object_name": "UPS Ratting",
+      "zones": {
+        "Delta UPS": [
+          "RKVA"
+        ],
+        "some_model": [
+          ""
+        ]
+      },
+      "footer_query": "|> map(fn: (r) => ({ r with _value: r._value /100.0 })) \n |> last()",
+      "object_unit": "kVA",
+      "object_min_thresh": 0,
+      "object_max_thresh": null
+    },
+    "UPS_TYPE": {
+      "object_name": "UPS Type",
+      "zones": {
+        "Delta UPS": [
+          "RTYPE"
+        ],
+        "some_model": [
+          ""
+        ]
+      },
+      "footer_query": "|> last()",
+      "object_unit": "Phase",
+      "object_min_thresh": null,
+      "object_max_thresh": null
+    },
+    "UPS_BATTERY_VOLT": {
+      "object_name": "UPS Battery Voltage",
+      "zones": {
+        "Delta UPS": [
+          "BATTVOLT"
+        ],
+        "some_model": [
+          "BATV"
+        ]
+      },
+      "footer_query": "|> last()",
+      "object_unit": "V",
+      "object_min_thresh": 0,
+      "object_max_thresh": null
+    },
+    "UPS_BATTERY_CHARGE": {
+      "object_name": "UPS Battery Charge",
+      "zones": {
+        "Delta UPS": [
+          "BATTCHR"
+        ],
+        "some_model": [
+          ""
+        ]
+      },
+      "footer_query": "|> last()",
+      "object_unit": null,
+      "object_min_thresh": null,
+      "object_max_thresh": null
+    },
+    "UPS_BATTERY_CHARGE_MODE": {
+      "object_name": "UPS Charge Mode",
+      "zones": {
+        "Delta UPS": [
+          "BATTMODE"
+        ],
+        "some_model": [
+          ""
+        ]
+      },
+      "footer_query": "|> last()",
+      "object_unit": null,
+      "object_min_thresh": null,
+      "object_max_thresh": null
+    },
+    "UPS_PHASE1_OUT_VOLT": {
+      "object_name": "UPS Phase 1 Output Voltage",
+      "zones": {
+        "Delta UPS": [
+          "OV1"
+        ],
+        "some_model": [
+          "OV"
+        ]
+      },
+      "footer_query": "|> last()",
+      "object_unit": "V",
+      "object_min_thresh": 0,
+      "object_max_thresh": 280
+    },
+    "UPS_PHASE2_OUT_VOLT": {
+      "object_name": "UPS Phase 2 Output Voltage",
+      "zones": {
+        "Delta UPS": [
+          "OV2"
+        ],
+        "some_model": [
+          ""
+        ]
+      },
+      "footer_query": "|> last()",
+      "object_unit": "V",
+      "object_min_thresh": 0,
+      "object_max_thresh": 280
+    },
+    "UPS_PHASE3_OUT_VOLT": {
+      "object_name": "UPS Phase 3 Output Voltage",
+      "zones": {
+        "Delta UPS": [
+          "OV3"
+        ],
+        "some_model": [
+          ""
+        ]
+      },
+      "footer_query": "|> last()",
+      "object_unit": "V",
+      "object_min_thresh": 0,
+      "object_max_thresh": 280
+    },
+    "UPS_PHASE1_OUT_CURR": {
+      "object_name": "UPS Phase 1 Output Current",
+      "zones": {
+        "Delta UPS": [
+          "OC1"
+        ],
+        "some_model": [
+          "IV"
+        ]
+      },
+      "footer_query": "|> last()",
+      "object_unit": "A",
+      "object_min_thresh": 0,
+      "object_max_thresh": null
+    },
+    "UPS_PHASE2_OUT_CURR": {
+      "object_name": "UPS Phase 2 Output Current",
+      "zones": {
+        "Delta UPS": [
+          "OC2"
+        ],
+        "some_model": [
+          ""
+        ]
+      },
+      "footer_query": "|> last()",
+      "object_unit": "A",
+      "object_min_thresh": 0,
+      "object_max_thresh": null
+    },
+    "UPS_PHASE3_OUT_CURR": {
+      "object_name": "UPS Phase 3 Output Current",
+      "zones": {
+        "Delta UPS": [
+          "OC3"
+        ],
+        "some_model": [
+          ""
+        ]
+      },
+      "footer_query": "|> last()",
+      "object_unit": "A",
+      "object_min_thresh": 0,
+      "object_max_thresh": null
+    },
+    "UPS_BATTERY_PERCENT": {
+      "object_name": "UPS Battery Percentage",
+      "zones": {
+        "Delta UPS": [
+          "BATTPER"
+        ],
+        "some_model": [
+          ""
+        ]
+      },
+      "footer_query": "|> aggregateWindow(every: 1h, fn: last, createEmpty: false)",
+      "object_unit": null,
+      "object_min_thresh": null,
+      "object_max_thresh": null
+    },
+    "UPS_LOAD_PHASE": {
+      "object_name": "UPS Load Phase-wise",
+      "zones": {
+        "Delta UPS": [
+          "PLOAD1, PLOAD2, PLOAD3"
+        ],
+        "some_model": [
+          "PLOAD"
+        ]
+      },
+      "footer_query": "|> group(columns: [\"zone\"])  \n|> aggregateWindow(every: 1h, fn: last, createEmpty: false)",
+      "object_unit": "%",
+      "object_min_thresh": 0,
+      "object_max_thresh": 100
+    },
+    "UPS_PERCENT": {
+      "object_name": "UPS Percent",
+      "zones": {
+        "Delta UPS": [
+          "PLOAD1, PLOAD2, PLOAD3"
+        ],
+        "some_model": [
+          "PLOAD"
+        ]
+      },
+      "footer_query": "|> last() \n |> group(columns: [\"panel_no\"], mode:\"by\")  \n |> sum(column: \"_value\")",
+      "object_unit": "%",
+      "object_min_thresh": 0,
+      "object_max_thresh": 100
+    }
+  },
+  "DG": {
+    "FUEL_LEVEL": {
+      "object_name": "Fuel Level",
+      "zones": {
+        "sedemac_gc1111": [
+          "LEVEL"
+        ],
+        "DG_fuel_sensor_DHL": [
+          "FL"
+        ],
+        "Deepsea-4520-MK11": [
+          "FL"
+        ],
+        "DG SGC 120/121": [
+          "LEVEL"
+        ]
+      },
+      "footer_query": "",
+      "object_unit": "L",
+      "object_min_thresh": null,
+      "object_max_thresh": null
+    },
+    "RUN_HOURS": {
+      "object_name": "Run Hours",
+      "zones": {
+        "sedemac_gc1111": [
+          "HRS"
+        ],
+        "DG_fuel_sensor_DHL": [
+          ""
+        ],
+        "Deepsea-4520-MK11": [
+          "ERT"
+        ],
+        "DG SGC 120/121": [
+          "HRS"
+        ]
+      },
+      "footer_query": "",
+      "object_unit": null,
+      "object_min_thresh": null,
+      "object_max_thresh": null
+    },
+    "KWH": {
+      "object_name": "KWH",
+      "zones": {
+        "sedemac_gc1111": [
+          "KWH"
+        ],
+        "DG_fuel_sensor_DHL": [
+          ""
+        ],
+        "Deepsea-4520-MK11": [
+          "KWH"
+        ],
+        "DG SGC 120/121": [
+          "DKWH"
+        ]
+      },
+      "footer_query": "",
+      "object_unit": "kWh",
+      "object_min_thresh": 0,
+      "object_max_thresh": null
+    },
+    "FL_RH_KWH": {
+      "object_name": "Run Hours VS Fuel Level VS KWH",
+      "zones": {
+        "sedemac_gc1111": [
+          "HRS, KWH, LEVEL"
+        ],
+        "DG_fuel_sensor_DHL": [
+          "FL"
+        ],
+        "Deepsea-4520-MK11": [
+          "ERT, KWH, FL"
+        ],
+        "DG SGC 120/121": [
+          "HRS, DKWH, LEVEL"
+        ]
+      },
+      "footer_query": "|> aggregateWindow(every: 1h, fn: last, createEmpty: false)",
+      "object_unit": null,
+      "object_min_thresh": 0,
+      "object_max_thresh": null
+    },
+    "DG_BATTERY_VOLTAGE": {
+      "object_name": "DG Battery Voltage",
+      "zones": {
+        "sedemac_gc1111": [
+          "BV"
+        ],
+        "DG_fuel_sensor_DHL": [
+          "BV"
+        ],
+        "Deepsea-4520-MK11": [
+          "BV"
+        ],
+        "DG SGC 120/121": [
+          "BV"
+        ]
+      },
+      "footer_query": "|> last()",
+      "object_unit": "V",
+      "object_min_thresh": 0,
+      "object_max_thresh": 30
+    },
+    "CURRENT_FUEL_LEVEL": {
+      "object_name": "Current Fuel Level",
+      "zones": {
+        "sedemac_gc1111": [
+          "LEVEL"
+        ],
+        "DG_fuel_sensor_DHL": [
+          "FL"
+        ],
+        "Deepsea-4520-MK11": [
+          "FL"
+        ],
+        "DG SGC 120/121": [
+          "LEVEL"
+        ]
+      },
+      "footer_query": "|> last()",
+      "object_unit": "L",
+      "object_min_thresh": null,
+      "object_max_thresh": null
+    },
+    "PREVIOUS_MONTH_DG_USE": {
+      "object_name": "Previous Month DG Use",
+      "zones": {
+        "sedemac_gc1111": [
+          "HRS"
+        ],
+        "DG_fuel_sensor_DHL": [
+          ""
+        ],
+        "Deepsea-4520-MK11": [
+          "ERT"
+        ],
+        "DG SGC 120/121": [
+          "HRS"
+        ]
+      },
+      "footer_query": "|> aggregateWindow(every: 1d, fn: last, createEmpty: false) \n|> difference(nonNegative: false, columns: [\"_value\"]) \n|> sum()",
+      "object_unit": "hours",
+      "object_min_thresh": 0,
+      "object_max_thresh": null
+    },
+    "CURRENT_MONTH_DG_USE": {
+      "object_name": "Current Month DG Use",
+      "zones": {
+        "sedemac_gc1111": [
+          "HRS"
+        ],
+        "DG_fuel_sensor_DHL": [
+          ""
+        ],
+        "Deepsea-4520-MK11": [
+          "ERT"
+        ],
+        "DG SGC 120/121": [
+          "HRS"
+        ]
+      },
+      "footer_query": "|> aggregateWindow(every: 1d, fn: last, createEmpty: false) \n|> difference(nonNegative: false, columns: [\"_value\"]) \n|> sum()",
+      "object_unit": "hours",
+      "object_min_thresh": 0,
+      "object_max_thresh": null
+    },
+    "TODAY_DG_USE": {
+      "object_name": "Today DG Use",
+      "zones": {
+        "sedemac_gc1111": [
+          "HRS"
+        ],
+        "DG_fuel_sensor_DHL": [
+          ""
+        ],
+        "Deepsea-4520-MK11": [
+          "ERT"
+        ],
+        "DG SGC 120/121": [
+          "HRS"
+        ]
+      },
+      "footer_query": "|> aggregateWindow(every: 1d, fn: last, createEmpty: false) \n|> difference(nonNegative: false, columns: [\"_value\"]) \n|> last()",
+      "object_unit": "hours",
+      "object_min_thresh": 0,
+      "object_max_thresh": null
+    },
+    "PREVIOUS_MONTH_DG_KWH": {
+      "object_name": "Previous Month DG KWH",
+      "zones": {
+        "sedemac_gc1111": [
+          "KWH"
+        ],
+        "DG_fuel_sensor_DHL": [
+          ""
+        ],
+        "Deepsea-4520-MK11": [
+          "KWH"
+        ],
+        "DG SGC 120/121": [
+          "DKWH"
+        ]
+      },
+      "footer_query": "|> timeShift(duration: 330m, columns: [ \"_time\"]) \n|> aggregateWindow(every: 1mo, fn: last, createEmpty: false) \n|> difference(nonNegative: false, columns: [\"_value\"])",
+      "object_unit": "kWh",
+      "object_min_thresh": 0,
+      "object_max_thresh": null
+    },
+    "CURRENT_MONTH_DG_KWH": {
+      "object_name": "Current Month DG KWH",
+      "zones": {
+        "sedemac_gc1111": [
+          "KWH"
+        ],
+        "DG_fuel_sensor_DHL": [
+          ""
+        ],
+        "Deepsea-4520-MK11": [
+          "KWH"
+        ],
+        "DG SGC 120/121": [
+          "DKWH"
+        ]
+      },
+      "footer_query": "|> timeShift(duration: 330m, columns: [ \"_time\"]) \n|> aggregateWindow(every: 1mo, fn: last, createEmpty: false) \n|> difference(nonNegative: false, columns: [\"_value\"])",
+      "object_unit": "kWh",
+      "object_min_thresh": 0,
+      "object_max_thresh": null
+    },
+    "TODAY_DG_KWH": {
+      "object_name": "Today\u2019s DG KWH",
+      "zones": {
+        "sedemac_gc1111": [
+          "KWH"
+        ],
+        "DG_fuel_sensor_DHL": [
+          ""
+        ],
+        "Deepsea-4520-MK11": [
+          "KWH"
+        ],
+        "DG SGC 120/121": [
+          "DKWH"
+        ]
+      },
+      "footer_query": "|> timeShift(duration: 330m, columns: [ \"_time\"]) \n|> aggregateWindow(every: 1d, fn: last, createEmpty: false) \n|> difference(nonNegative: false, columns: [\"_value\"]) \n|> last()",
+      "object_unit": "kWh",
+      "object_min_thresh": 0,
+      "object_max_thresh": null
+    },
+    "TOTAL_DG_RUN_HRS": {
+      "object_name": "Total DG Run HRS",
+      "zones": {
+        "sedemac_gc1111": [
+          "HRS"
+        ],
+        "DG_fuel_sensor_DHL": [
+          ""
+        ],
+        "Deepsea-4520-MK11": [
+          "ERT"
+        ],
+        "DG SGC 120/121": [
+          "HRS"
+        ]
+      },
+      "footer_query": "|> last()",
+      "object_unit": "hours",
+      "object_min_thresh": 0,
+      "object_max_thresh": null
+    },
+    "DG_CONSUMPTION": {
+      "object_name": "DG consumption",
+      "zones": {
+        "sedemac_gc1111": [
+          "KWH"
+        ],
+        "DG_fuel_sensor_DHL": [
+          ""
+        ],
+        "Deepsea-4520-MK11": [
+          "KWH"
+        ],
+        "DG SGC 120/121": [
+          "DKWH"
+        ]
+      },
+      "footer_query": "|> last()",
+      "object_unit": "kWh",
+      "object_min_thresh": 0,
+      "object_max_thresh": null
+    }
+  },
+  "ENERGY": {
+    "POWER_FACTOR": {
+      "object_name": "Power Factor",
+      "zones": {
+        "Elmeasure Energy Meter(Distribution)": [
+          "APF"
+        ],
+        "Elmeasure Energy Meter(Mains)": [
+          "APF"
+        ],
+        "selec-306-C-D": [
+          "APF"
+        ],
+        "selec-mrj4m-quad": [
+          "APF"
+        ],
+        "Schneider-Conzerv-METSEEM6438H": [
+          "APF"
+        ],
+        "schneider-em6400ng": [
+          "APF"
+        ],
+        "socomec-multis-lm35": [
+          "APF"
+        ],
+        "trinity-tinypro-6": [
+          "APF"
+        ],
+        "selec-mfm384": [
+          "APF"
+        ],
+        "selec-mfm384d": [
+          "APF"
+        ],
+        "DT-108": [
+          ""
+        ],
+        "LG5310": [
+          "APF"
+        ],
+        "ELite 440": [
+          "APF"
+        ],
+        "ESP ModBus": [
+          "APF"
+        ],
+        "Selec-EM4M-3P-C-100A": [
+          "APF"
+        ],
+        "ELite 500": [
+          "APF"
+        ]
+      },
+      "footer_query": "|> last()",
+      "object_unit": null,
+      "object_min_thresh": -1,
+      "object_max_thresh": 1
+    },
+    "FREQUENCY": {
+      "object_name": "Frequency",
+      "zones": {
+        "Elmeasure Energy Meter(Distribution)": [
+          "F"
+        ],
+        "Elmeasure Energy Meter(Mains)": [
+          "F"
+        ],
+        "selec-306-C-D": [
+          "F"
+        ],
+        "selec-mrj4m-quad": [
+          "F"
+        ],
+        "Schneider-Conzerv-METSEEM6438H": [
+          "F"
+        ],
+        "schneider-em6400ng": [
+          "FREQ"
+        ],
+        "socomec-multis-lm35": [
+          "F"
+        ],
+        "trinity-tinypro-6": [
+          "F"
+        ],
+        "selec-mfm384": [
+          "F"
+        ],
+        "selec-mfm384d": [
+          "F"
+        ],
+        "DT-108": [
+          "FREQ"
+        ],
+        "LG5310": [
+          "FREQ"
+        ],
+        "ELite 440": [
+          "F"
+        ],
+        "ESP ModBus": [
+          "F"
+        ],
+        "Selec-EM4M-3P-C-100A": [
+          "F"
+        ],
+        "ELite 500": [
+          "F"
+        ]
+      },
+      "footer_query": "|> last()",
+      "object_unit": "Hz",
+      "object_min_thresh": 0,
+      "object_max_thresh": 50
+    },
+    "MAX_KWH": {
+      "object_name": "Max KW",
+      "zones": {
+        "Elmeasure Energy Meter(Distribution)": [
+          "TKW"
+        ],
+        "Elmeasure Energy Meter(Mains)": [
+          "TKW"
+        ],
+        "selec-306-C-D": [
+          "TKW"
+        ],
+        "selec-mrj4m-quad": [
+          "TKW"
+        ],
+        "Schneider-Conzerv-METSEEM6438H": [
+          "TKW"
+        ],
+        "schneider-em6400ng": [
+          "TKW"
+        ],
+        "socomec-multis-lm35": [
+          "kW1, kW2, kW3"
+        ],
+        "trinity-tinypro-6": [
+          "TKW"
+        ],
+        "selec-mfm384": [
+          "TKW"
+        ],
+        "selec-mfm384d": [
+          "TKW"
+        ],
+        "DT-108": [
+          "KWH1, KWH2, KWH3"
+        ],
+        "LG5310": [
+          "TKW"
+        ],
+        "ELite 440": [
+          "TKW"
+        ],
+        "ESP ModBus": [
+          "TKW"
+        ],
+        "Selec-EM4M-3P-C-100A": [
+          "TKW"
+        ],
+        "ELite 500": [
+          "TKW"
+        ]
+      },
+      "footer_query": "|> max()  \n|> map(fn: (r) => ({ r with _value: r._value / 1000.0 }))",
+      "object_unit": "kW",
+      "object_min_thresh": 0,
+      "object_max_thresh": null
+    },
+    "LAST_KWH": {
+      "object_name": "Last KW",
+      "zones": {
+        "Elmeasure Energy Meter(Distribution)": [
+          "TKW"
+        ],
+        "Elmeasure Energy Meter(Mains)": [
+          "TKW"
+        ],
+        "selec-306-C-D": [
+          "TKW"
+        ],
+        "selec-mrj4m-quad": [
+          "TKW"
+        ],
+        "Schneider-Conzerv-METSEEM6438H": [
+          "TKW"
+        ],
+        "schneider-em6400ng": [
+          "TKW"
+        ],
+        "socomec-multis-lm35": [
+          "kW1, kW2, kW3"
+        ],
+        "trinity-tinypro-6": [
+          "TKW"
+        ],
+        "selec-mfm384": [
+          "TKW"
+        ],
+        "selec-mfm384d": [
+          "TKW"
+        ],
+        "DT-108": [
+          "KWH1, KWH2, KWH3"
+        ],
+        "LG5310": [
+          "TKW"
+        ],
+        "ELite 440": [
+          "TKW"
+        ],
+        "ESP ModBus": [
+          "TKW"
+        ],
+        "Selec-EM4M-3P-C-100A": [
+          "TKW"
+        ],
+        "ELite 500": [
+          "TKW"
+        ]
+      },
+      "footer_query": "|> last()  \n|> map(fn: (r) => ({ r with _value: r._value / 1000.0 }))",
+      "object_unit": "kW",
+      "object_min_thresh": 0,
+      "object_max_thresh": null
+    },
+    "PHASE_WISE_LOAD": {
+      "object_name": "Phase Wise Load",
+      "zones": {
+        "Elmeasure Energy Meter(Distribution)": [
+          "I1, I2, I3"
+        ],
+        "Elmeasure Energy Meter(Mains)": [
+          "I1, I2, I3"
+        ],
+        "selec-306-C-D": [
+          "I1, I2, I3"
+        ],
+        "selec-mrj4m-quad": [
+          "I1, I2, I3"
+        ],
+        "Schneider-Conzerv-METSEEM6438H": [
+          ""
+        ],
+        "schneider-em6400ng": [
+          "I1, I2, I3"
+        ],
+        "socomec-multis-lm35": [
+          "I1, I2, I3"
+        ],
+        "trinity-tinypro-6": [
+          "I1, I2, I3"
+        ],
+        "selec-mfm384": [
+          "I1, I2, I3"
+        ],
+        "selec-mfm384d": [
+          "I1, I2, I3"
+        ],
+        "DT-108": [
+          "I1, I2, I3"
+        ],
+        "LG5310": [
+          "I1, I2, I3"
+        ],
+        "ELite 440": [
+          "I1, I2, I3"
+        ],
+        "ESP ModBus": [
+          "I1, I2, I3"
+        ],
+        "Selec-EM4M-3P-C-100A": [
+          "I1, I2, I3"
+        ],
+        "ELite 500": [
+          "I1, I2, I3"
+        ]
+      },
+      "footer_query": "|> last()",
+      "object_unit": "A",
+      "object_min_thresh": 0,
+      "object_max_thresh": null
+    },
+    "VOLTAGE": {
+      "object_name": "Voltage",
+      "zones": {
+        "Elmeasure Energy Meter(Distribution)": [
+          "V1N, V2N, V3N, AVLN"
+        ],
+        "Elmeasure Energy Meter(Mains)": [
+          "V1N, V2N, V3N"
+        ],
+        "selec-306-C-D": [
+          "V1N, V2N, V3N"
+        ],
+        "selec-mrj4m-quad": [
+          "V1N, V2N, V3N"
+        ],
+        "Schneider-Conzerv-METSEEM6438H": [
+          ""
+        ],
+        "schneider-em6400ng": [
+          "V1, V2, V3"
+        ],
+        "socomec-multis-lm35": [
+          "V1N, V2N, V3N"
+        ],
+        "trinity-tinypro-6": [
+          "V1N, V2N, V3N"
+        ],
+        "selec-mfm384": [
+          "V1N, V2N, V3N"
+        ],
+        "selec-mfm384d": [
+          "V1N, V2N, V3N"
+        ],
+        "DT-108": [
+          "VLN1, VLN2, VLN3"
+        ],
+        "LG5310": [
+          "V1N, V2N, V3N"
+        ],
+        "ELite 440": [
+          "V1N, V2N, V3N"
+        ],
+        "ESP ModBus": [
+          "V1N, V2N, V3N"
+        ],
+        "Selec-EM4M-3P-C-100A": [
+          "V1N, V2N, V3N"
+        ],
+        "ELite 500": [
+          "V1N, V2N, V3N"
+        ]
+      },
+      "footer_query": "|> aggregateWindow(every: 1h, fn: last, createEmpty: false)",
+      "object_unit": "V",
+      "object_min_thresh": 0,
+      "object_max_thresh": 280
+    },
+    "MAIN_KWH": {
+      "object_name": "Main KWH",
+      "zones": {
+        "Elmeasure Energy Meter(Distribution)": [
+          "WHIMP"
+        ],
+        "Elmeasure Energy Meter(Mains)": [
+          "WHIMP"
+        ],
+        "selec-306-C-D": [
+          "KWH"
+        ],
+        "selec-mrj4m-quad": [
+          "TKWH"
+        ],
+        "Schneider-Conzerv-METSEEM6438H": [
+          "KWHEXP"
+        ],
+        "schneider-em6400ng": [
+          "KWH"
+        ],
+        "socomec-multis-lm35": [
+          "KWH"
+        ],
+        "trinity-tinypro-6": [
+          "KWH"
+        ],
+        "selec-mfm384": [
+          "KWH"
+        ],
+        "selec-mfm384d": [
+          "KWH"
+        ],
+        "DT-108": [
+          "KWH"
+        ],
+        "LG5310": [
+          "KWH"
+        ],
+        "ELite 440": [
+          "IMPKWH"
+        ],
+        "ESP ModBus": [
+          "KWH"
+        ],
+        "Selec-EM4M-3P-C-100A": [
+          "TKWHMAIN"
+        ],
+        "ELite 500": [
+          "IMPKWH"
+        ]
+      },
+      "footer_query": "|> aggregateWindow(every: 1mo, fn: spread, createEmpty: false)  \n|> sum()",
+      "object_unit": "kWh",
+      "object_min_thresh": 0,
+      "object_max_thresh": null
+    },
+    "PRE_MON_MAIN_KWH": {
+      "object_name": "Previous Month Main KWH",
+      "zones": {
+        "Elmeasure Energy Meter(Distribution)": [
+          "WHIMP"
+        ],
+        "Elmeasure Energy Meter(Mains)": [
+          "WHIMP"
+        ],
+        "selec-306-C-D": [
+          "KWH"
+        ],
+        "selec-mrj4m-quad": [
+          "TKWH"
+        ],
+        "Schneider-Conzerv-METSEEM6438H": [
+          "KWHEXP"
+        ],
+        "schneider-em6400ng": [
+          "KWH"
+        ],
+        "socomec-multis-lm35": [
+          "KWH"
+        ],
+        "trinity-tinypro-6": [
+          "KWH"
+        ],
+        "selec-mfm384": [
+          "KWH"
+        ],
+        "selec-mfm384d": [
+          "KWH"
+        ],
+        "DT-108": [
+          "KWH"
+        ],
+        "LG5310": [
+          "KWH"
+        ],
+        "ELite 440": [
+          "IMPKWH"
+        ],
+        "ESP ModBus": [
+          "KWH"
+        ],
+        "Selec-EM4M-3P-C-100A": [
+          "TKWHMAIN"
+        ],
+        "ELite 500": [
+          "IMPKWH"
+        ]
+      },
+      "footer_query": "|> aggregateWindow(every: 1mo, fn: spread, createEmpty: false)  \n|> sum()",
+      "object_unit": "kWh",
+      "object_min_thresh": 0,
+      "object_max_thresh": null
+    },
+    "PRE_MON_DG_KWH": {
+      "object_name": "Previous Month DG KWH",
+      "zones": {
+        "Elmeasure Energy Meter(Distribution)": [
+          "WHEXP"
+        ],
+        "Elmeasure Energy Meter(Mains)": [
+          "WHEXP"
+        ],
+        "selec-306-C-D": [
+          "DKWH"
+        ],
+        "selec-mrj4m-quad": [
+          "DKWH"
+        ],
+        "Schneider-Conzerv-METSEEM6438H": [
+          "KWHIMP"
+        ],
+        "schneider-em6400ng": [
+          ""
+        ],
+        "socomec-multis-lm35": [
+          ""
+        ],
+        "trinity-tinypro-6": [
+          "DKWH1"
+        ],
+        "selec-mfm384": [
+          ""
+        ],
+        "selec-mfm384d": [
+          "DKWH"
+        ],
+        "DT-108": [
+          ""
+        ],
+        "LG5310": [
+          ""
+        ],
+        "ELite 440": [
+          "EXPKWH"
+        ],
+        "ESP ModBus": [
+          "DKWH"
+        ],
+        "Selec-EM4M-3P-C-100A": [
+          "TKWHDG"
+        ],
+        "ELite 500": [
+          "EXPKWH"
+        ]
+      },
+      "footer_query": "|> aggregateWindow(every: 10m, fn: last, createEmpty: false) \n|> difference(nonNegative: false, columns: [\"_value\"]) \n|> map(fn: (r) => ({ r with _value: if r._value < 0 or r._value > 1000 then float(v:0) else float(v: \"${r._value}\"),})) \n|> aggregateWindow(every: 1mo, fn: sum, createEmpty: false) \n|> group(columns: [\"panel_no\"] )",
+      "object_unit": "kWh",
+      "object_min_thresh": 0,
+      "object_max_thresh": null
+    },
+    "DG_KWH": {
+      "object_name": "DG KWH",
+      "zones": {
+        "Elmeasure Energy Meter(Distribution)": [
+          "WHEXP"
+        ],
+        "Elmeasure Energy Meter(Mains)": [
+          "WHEXP"
+        ],
+        "selec-306-C-D": [
+          "DKWH"
+        ],
+        "selec-mrj4m-quad": [
+          "DKWH"
+        ],
+        "Schneider-Conzerv-METSEEM6438H": [
+          "KWHIMP"
+        ],
+        "schneider-em6400ng": [
+          ""
+        ],
+        "socomec-multis-lm35": [
+          ""
+        ],
+        "trinity-tinypro-6": [
+          "DKWH1"
+        ],
+        "selec-mfm384": [
+          ""
+        ],
+        "selec-mfm384d": [
+          "DKWH"
+        ],
+        "DT-108": [
+          ""
+        ],
+        "LG5310": [
+          ""
+        ],
+        "ELite 440": [
+          "EXPKWH"
+        ],
+        "ESP ModBus": [
+          "DKWH"
+        ],
+        "Selec-EM4M-3P-C-100A": [
+          "TKWHDG"
+        ],
+        "ELite 500": [
+          "EXPKWH"
+        ]
+      },
+      "footer_query": "|> aggregateWindow(every: 10m, fn: last, createEmpty: false) \n|> difference(nonNegative: false, columns: [\"_value\"]) \n|> map(fn: (r) => ({ r with _value: if r._value < 0 or r._value > 1000 then float(v:0) else float(v: \"${r._value}\"),})) \n|> aggregateWindow(every: 1mo, fn: sum, createEmpty: false) \n|> group(columns: [\"panel_no\"] )",
+      "object_unit": "kWh",
+      "object_min_thresh": 0,
+      "object_max_thresh": null
+    },
+    "CURR_WEEK_HOURLY": {
+      "object_name": "Past 7 Days Hourly consumption",
+      "zones": {
+        "Elmeasure Energy Meter(Distribution)": [
+          "WHIMP"
+        ],
+        "Elmeasure Energy Meter(Mains)": [
+          "WHIMP"
+        ],
+        "selec-306-C-D": [
+          "KWH"
+        ],
+        "selec-mrj4m-quad": [
+          "TKWH"
+        ],
+        "Schneider-Conzerv-METSEEM6438H": [
+          "KWHEXP"
+        ],
+        "schneider-em6400ng": [
+          "KWH"
+        ],
+        "socomec-multis-lm35": [
+          "KWH"
+        ],
+        "trinity-tinypro-6": [
+          "KWH"
+        ],
+        "selec-mfm384": [
+          "KWH"
+        ],
+        "selec-mfm384d": [
+          "KWH"
+        ],
+        "DT-108": [
+          "KWH"
+        ],
+        "LG5310": [
+          "KWH"
+        ],
+        "ELite 440": [
+          "IMPKWH"
+        ],
+        "ESP ModBus": [
+          "KWH"
+        ],
+        "Selec-EM4M-3P-C-100A": [
+          "TKWHMAIN"
+        ],
+        "ELite 500": [
+          "IMPKWH"
+        ]
+      },
+      "footer_query": "|> aggregateWindow(every: 1h, fn: spread, createEmpty: false)  \n|> sum()",
+      "object_unit": null,
+      "object_min_thresh": 0,
+      "object_max_thresh": null
+    },
+    "CURR_MONTH_DAILY": {
+      "object_name": "Current Month Daily consumption",
+      "zones": {
+        "Elmeasure Energy Meter(Distribution)": [
+          "WHIMP"
+        ],
+        "Elmeasure Energy Meter(Mains)": [
+          "WHIMP"
+        ],
+        "selec-306-C-D": [
+          "KWH"
+        ],
+        "selec-mrj4m-quad": [
+          "TKWH"
+        ],
+        "Schneider-Conzerv-METSEEM6438H": [
+          "KWHEXP"
+        ],
+        "schneider-em6400ng": [
+          "KWH"
+        ],
+        "socomec-multis-lm35": [
+          "KWH"
+        ],
+        "trinity-tinypro-6": [
+          "KWH"
+        ],
+        "selec-mfm384": [
+          "KWH"
+        ],
+        "selec-mfm384d": [
+          "KWH"
+        ],
+        "DT-108": [
+          "KWH"
+        ],
+        "LG5310": [
+          "KWH"
+        ],
+        "ELite 440": [
+          "IMPKWH"
+        ],
+        "ESP ModBus": [
+          "KWH"
+        ],
+        "Selec-EM4M-3P-C-100A": [
+          "TKWHMAIN"
+        ],
+        "ELite 500": [
+          "IMPKWH"
+        ]
+      },
+      "footer_query": "|> aggregateWindow(every: 1d, fn: spread, createEmpty: false) \n |> sum()",
+      "object_unit": null,
+      "object_min_thresh": 0,
+      "object_max_thresh": null
+    },
+    "PRE_THREE_MONTH": {
+      "object_name": "Previous 3 Month consumption",
+      "zones": {
+        "Elmeasure Energy Meter(Distribution)": [
+          "WHIMP"
+        ],
+        "Elmeasure Energy Meter(Mains)": [
+          "WHIMP"
+        ],
+        "selec-306-C-D": [
+          "KWH"
+        ],
+        "selec-mrj4m-quad": [
+          "TKWH"
+        ],
+        "Schneider-Conzerv-METSEEM6438H": [
+          "KWHEXP"
+        ],
+        "schneider-em6400ng": [
+          "KWH"
+        ],
+        "socomec-multis-lm35": [
+          "KWH"
+        ],
+        "trinity-tinypro-6": [
+          "KWH"
+        ],
+        "selec-mfm384": [
+          "KWH"
+        ],
+        "selec-mfm384d": [
+          "KWH"
+        ],
+        "DT-108": [
+          "KWH"
+        ],
+        "LG5310": [
+          "KWH"
+        ],
+        "ELite 440": [
+          "IMPKWH"
+        ],
+        "ESP ModBus": [
+          "KWH"
+        ],
+        "Selec-EM4M-3P-C-100A": [
+          "TKWHMAIN"
+        ],
+        "ELite 500": [
+          "IMPKWH"
+        ]
+      },
+      "footer_query": "|> aggregateWindow(every: 1mo, fn: spread, createEmpty: false)  \n|> sum()",
+      "object_unit": null,
+      "object_min_thresh": 0,
+      "object_max_thresh": null
+    },
+    "LAST_AVG_VOLTAGE": {
+      "object_name": "Average Voltage",
+      "zones": {
+        "Elmeasure Energy Meter(Distribution)": [
+          "AVLN"
+        ],
+        "Elmeasure Energy Meter(Mains)": [
+          "AVLN"
+        ],
+        "selec-306-C-D": [
+          "AVLN"
+        ],
+        "selec-mrj4m-quad": [
+          "AVLN"
+        ],
+        "Schneider-Conzerv-METSEEM6438H": [
+          ""
+        ],
+        "schneider-em6400ng": [
+          "LLVAVG"
+        ],
+        "socomec-multis-lm35": [
+          "AVLN"
+        ],
+        "trinity-tinypro-6": [
+          "AVLN"
+        ],
+        "selec-mfm384": [
+          "AVLN"
+        ],
+        "selec-mfm384d": [
+          "AVLN"
+        ],
+        "DT-108": [
+          ""
+        ],
+        "LG5310": [
+          "AVLN"
+        ],
+        "ELite 440": [
+          "AVLN"
+        ],
+        "ESP ModBus": [
+          "AVLN"
+        ],
+        "Selec-EM4M-3P-C-100A": [
+          "AVLN"
+        ],
+        "ELite 500": [
+          "AVLN"
+        ]
+      },
+      "footer_query": "|> last()",
+      "object_unit": "V",
+      "object_min_thresh": 0,
+      "object_max_thresh": 280
+    },
+    "LAST_AVG_CURRENT": {
+      "object_name": "Average Current",
+      "zones": {
+        "Elmeasure Energy Meter(Distribution)": [
+          "AI"
+        ],
+        "Elmeasure Energy Meter(Mains)": [
+          "AI"
+        ],
+        "selec-306-C-D": [
+          "AI"
+        ],
+        "selec-mrj4m-quad": [
+          "AI"
+        ],
+        "Schneider-Conzerv-METSEEM6438H": [
+          ""
+        ],
+        "schneider-em6400ng": [
+          "IAVG"
+        ],
+        "socomec-multis-lm35": [
+          "AI"
+        ],
+        "trinity-tinypro-6": [
+          "AI"
+        ],
+        "selec-mfm384": [
+          "AI"
+        ],
+        "selec-mfm384d": [
+          "AI"
+        ],
+        "DT-108": [
+          ""
+        ],
+        "LG5310": [
+          "AI"
+        ],
+        "ELite 440": [
+          ""
+        ],
+        "ESP ModBus": [
+          "AI"
+        ],
+        "Selec-EM4M-3P-C-100A": [
+          "I3"
+        ],
+        "ELite 500": [
+          ""
+        ]
+      },
+      "footer_query": "|> last()",
+      "object_unit": "A",
+      "object_min_thresh": 0,
+      "object_max_thresh": null
+    },
+    "MAX_POWER": {
+      "object_name": "Max Power",
+      "zones": {
+        "Elmeasure Energy Meter(Distribution)": [
+          "TKW"
+        ],
+        "Elmeasure Energy Meter(Mains)": [
+          "TKW"
+        ],
+        "selec-306-C-D": [
+          "TKW"
+        ],
+        "selec-mrj4m-quad": [
+          "TKW"
+        ],
+        "Schneider-Conzerv-METSEEM6438H": [
+          "TKW"
+        ],
+        "schneider-em6400ng": [
+          "TKW"
+        ],
+        "socomec-multis-lm35": [
+          "kW1, kW2, kW3"
+        ],
+        "trinity-tinypro-6": [
+          "TKW"
+        ],
+        "selec-mfm384": [
+          "TKW"
+        ],
+        "selec-mfm384d": [
+          "TKW"
+        ],
+        "DT-108": [
+          "KWH1, KWH2, KWH3"
+        ],
+        "LG5310": [
+          "TKW"
+        ],
+        "ELite 440": [
+          "TKW"
+        ],
+        "ESP ModBus": [
+          "TKW"
+        ],
+        "Selec-EM4M-3P-C-100A": [
+          "TKW"
+        ],
+        "ELite 500": [
+          "TKW"
+        ]
+      },
+      "footer_query": "|> max()  \n|> map(fn: (r) => ({ r with _value: r._value / 1000.0 }))",
+      "object_unit": "kW",
+      "object_min_thresh": 0,
+      "object_max_thresh": 1000
+    }
+  },
+  "FRESH_AIR": {
+    "ON_OFF_STATUS": {
+      "object_name": "ON/OFF status",
+      "zones": {
+        "485 Based 8-IO": [
+          "IOIN1, IOIN2, IOIN3, IOIN4, IOIN5, IOIN6, IOIN7, IOIN8"
+        ]
+      },
+      "footer_query": "|> aggregateWindow(every: 1d, fn: last, createEmpty: false) \n |> last()",
+      "object_unit": null,
+      "object_min_thresh": null,
+      "object_max_thresh": null
+    }
+  },
+  "MAIN_DASHBOARD": {
+    "SITE_CARBON_FOOTPRINT": {
+      "object_name": "Previous Month Carbon Footprint Saved",
+      "zones": {
+        "Elmeasure Energy Meter(Distribution)": [
+          "WHIMP"
+        ],
+        "Elmeasure Energy Meter(Mains)": [
+          "WHIMP"
+        ],
+        "selec-306-C-D": [
+          "KWH"
+        ],
+        "selec-mrj4m-quad": [
+          "TKWH"
+        ],
+        "Schneider-Conzerv-METSEEM6438H": [
+          "KWHEXP"
+        ],
+        "schneider-em6400ng": [
+          "KWH"
+        ]
+      },
+      "footer_query": "|> aggregateWindow(every: 1mo, fn: spread, createEmpty: false) \n |>sum()",
+      "object_unit": "kg",
+      "object_min_thresh": null,
+      "object_max_thresh": null,
+      "baseline": 31500,
+      "multiplier": 0.9
+    },
+    "SITE_SAVINGS": {
+      "object_name": "Previous Month Saving",
+      "zones": {
+        "Elmeasure Energy Meter(Distribution)": [
+          "WHIMP"
+        ],
+        "Elmeasure Energy Meter(Mains)": [
+          "WHIMP"
+        ],
+        "selec-306-C-D": [
+          "KWH"
+        ],
+        "selec-mrj4m-quad": [
+          "TKWH"
+        ],
+        "Schneider-Conzerv-METSEEM6438H": [
+          "KWHEXP"
+        ],
+        "schneider-em6400ng": [
+          "KWH"
+        ]
+      },
+      "footer_query": "|> aggregateWindow(every: 1mo, fn: spread, createEmpty: false) \n |>sum()",
+      "object_unit": "Kwh",
+      "object_min_thresh": null,
+      "object_max_thresh": null,
+      "baseline": 35000,
+      "multiplier": null
+    },
+    "SITE_EPI": {
+      "object_name": "Previous Month EPI",
+      "zones": {
+        "Elmeasure Energy Meter(Distribution)": [
+          "WHIMP"
+        ],
+        "Elmeasure Energy Meter(Mains)": [
+          "WHIMP"
+        ],
+        "selec-306-C-D": [
+          "KWH"
+        ],
+        "selec-mrj4m-quad": [
+          "TKWH"
+        ],
+        "Schneider-Conzerv-METSEEM6438H": [
+          "KWHEXP"
+        ],
+        "schneider-em6400ng": [
+          "KWH"
+        ]
+      },
+      "footer_query": "|> aggregateWindow(every: 1mo, fn: spread, createEmpty: false) \n |>sum()",
+      "object_unit": "kWh/sqft",
+      "object_min_thresh": null,
+      "object_max_thresh": null,
+      "baseline": 44080,
+      "multiplier": null
+    },
+    "SITE_AQI": {
+      "object_name": "AQI",
+      "zones": {
+        "Elmeasure Energy Meter(Distribution)": [
+          ""
+        ],
+        "Elmeasure Energy Meter(Mains)": [
+          ""
+        ],
+        "selec-306-C-D": [
+          ""
+        ],
+        "selec-mrj4m-quad": [
+          ""
+        ],
+        "Schneider-Conzerv-METSEEM6438H": [
+          ""
+        ],
+        "schneider-em6400ng": [
+          ""
+        ]
+      },
+      "footer_query": "|> last()",
+      "object_unit": "%",
+      "object_min_thresh": null,
+      "object_max_thresh": null,
+      "baseline": null,
+      "multiplier": null
+    },
+    "SITE_AVG_OCCUPANCY": {
+      "object_name": "Panel Status",
+      "zones": {
+        "Elmeasure Energy Meter(Distribution)": [
+          ""
+        ],
+        "Elmeasure Energy Meter(Mains)": [
+          ""
+        ],
+        "selec-306-C-D": [
+          ""
+        ],
+        "selec-mrj4m-quad": [
+          ""
+        ],
+        "Schneider-Conzerv-METSEEM6438H": [
+          ""
+        ],
+        "schneider-em6400ng": [
+          ""
+        ]
+      },
+      "footer_query": "|> last()",
+      "object_unit": null,
+      "object_min_thresh": null,
+      "object_max_thresh": null,
+      "baseline": null,
+      "multiplier": null
+    },
+    "SITE_FEEL_TEMPERATURE": {
+      "object_name": "Feel Temperature",
+      "zones": {
+        "Elmeasure Energy Meter(Distribution)": [
+          ""
+        ],
+        "Elmeasure Energy Meter(Mains)": [
+          ""
+        ],
+        "selec-306-C-D": [
+          ""
+        ],
+        "selec-mrj4m-quad": [
+          ""
+        ],
+        "Schneider-Conzerv-METSEEM6438H": [
+          ""
+        ],
+        "schneider-em6400ng": [
+          ""
+        ]
+      },
+      "footer_query": "|> filter(fn: (r) => r._value > 0 and r._value < 150, onEmpty: \"keep\") \n  |> group(columns: [\"_measurement\"]) \n  |> mean(column: \"_value\") \n",
+      "object_unit": "\u00b0C",
+      "object_min_thresh": null,
+      "object_max_thresh": null,
+      "baseline": null,
+      "multiplier": null
+    },
+    "ENERGY_CONSUMPTION_ACT_VAL": {
+      "object_name": "Energy",
+      "zones": {
+        "Elmeasure Energy Meter(Distribution)": [
+          "WHIMP"
+        ],
+        "Elmeasure Energy Meter(Mains)": [
+          "WHIMP"
+        ],
+        "selec-306-C-D": [
+          "KWH"
+        ],
+        "selec-mrj4m-quad": [
+          "TKWH"
+        ],
+        "Schneider-Conzerv-METSEEM6438H": [
+          "KWHEXP"
+        ],
+        "schneider-em6400ng": [
+          "KWH"
+        ]
+      },
+      "footer_query": "|> aggregateWindow(every: 1mo, fn: spread, createEmpty: false)  \n|> sum()",
+      "object_unit": null,
+      "object_min_thresh": null,
+      "object_max_thresh": null,
+      "baseline": null,
+      "multiplier": null
+    },
+    "DIESEL_CONSUMPTION_ACT_VAL": {
+      "object_name": "Diesel",
+      "zones": {
+        "Elmeasure Energy Meter(Distribution)": [
+          "WHEXP"
+        ],
+        "Elmeasure Energy Meter(Mains)": [
+          "WHEXP"
+        ],
+        "selec-306-C-D": [
+          "KWH"
+        ],
+        "selec-mrj4m-quad": [
+          "TKWH"
+        ],
+        "Schneider-Conzerv-METSEEM6438H": [
+          "KWHEXP"
+        ],
+        "schneider-em6400ng": [
+          ""
+        ]
+      },
+      "footer_query": "|> aggregateWindow(every: 1d, fn: last, createEmpty: false) \n  |> difference(nonNegative: false, columns: [\"_value\"]) \n  |> sum(column: \"_value\")",
+      "object_unit": null,
+      "object_min_thresh": null,
+      "object_max_thresh": null,
+      "baseline": null,
+      "multiplier": null
+    },
+    "SITE_HISTORICAL_CONSUMPTION": {
+      "object_name": "Last 3 Month energy consumption",
+      "zones": {
+        "Elmeasure Energy Meter(Distribution)": [
+          "WHIMP"
+        ],
+        "Elmeasure Energy Meter(Mains)": [
+          "WHIMP"
+        ],
+        "selec-306-C-D": [
+          "KWH"
+        ],
+        "selec-mrj4m-quad": [
+          "TKWH"
+        ],
+        "Schneider-Conzerv-METSEEM6438H": [
+          "KWHEXP"
+        ],
+        "schneider-em6400ng": [
+          "KWH"
+        ]
+      },
+      "footer_query": "|> aggregateWindow(every: 1mo, fn: spread, createEmpty: false)  \n|> sum()",
+      "object_unit": null,
+      "object_min_thresh": null,
+      "object_max_thresh": null,
+      "baseline": null,
+      "multiplier": null
+    },
+    "SITE_ALERTS": {
+      "object_name": "",
+      "zones": {
+        "Elmeasure Energy Meter(Distribution)": [
+          ""
+        ],
+        "Elmeasure Energy Meter(Mains)": [
+          ""
+        ],
+        "selec-306-C-D": [
+          ""
+        ],
+        "selec-mrj4m-quad": [
+          ""
+        ],
+        "Schneider-Conzerv-METSEEM6438H": [
+          ""
+        ],
+        "schneider-em6400ng": [
+          ""
+        ]
+      },
+      "footer_query": "",
+      "object_unit": null,
+      "object_min_thresh": null,
+      "object_max_thresh": null,
+      "baseline": null,
+      "multiplier": null
+    }
+  },
+  "MAIN_ENERGY_REPORT_WEEKLY": {
+    "VOLTAGE": {
+      "object_name": "Voltage",
+      "zones": {
+        "Elmeasure Energy Meter(Distribution)": [
+          "V1N, V2N, V3N, AVLN"
+        ],
+        "Elmeasure Energy Meter(Mains)": [
+          "V1N, V2N, V3N"
+        ],
+        "selec-306-C-D": [
+          ""
+        ],
+        "selec-mrj4m-quad": [
+          ""
+        ],
+        "Schneider-Conzerv-METSEEM6438H": [
+          ""
+        ],
+        "schneider-em6400ng": [
+          "V1, V2, V3"
+        ],
+        "Delta UPS": [
+          ""
+        ],
+        "some_model": [
+          ""
+        ]
+      },
+      "footer_query": "|> aggregateWindow(every: 1d, fn: last, createEmpty: false) \n |> last()",
+      "object_unit": "V",
+      "object_min_thresh": null,
+      "object_max_thresh": null
+    },
+    "V1N": {
+      "object_name": "Voltage",
+      "zones": {
+        "Elmeasure Energy Meter(Distribution)": [
+          "V1N"
+        ],
+        "Elmeasure Energy Meter(Mains)": [
+          "V1N"
+        ],
+        "selec-306-C-D": [
+          "V1N"
+        ],
+        "selec-mrj4m-quad": [
+          "V1N"
+        ],
+        "Schneider-Conzerv-METSEEM6438H": [
+          ""
+        ],
+        "schneider-em6400ng": [
+          "V1"
+        ],
+        "Delta UPS": [
+          ""
+        ],
+        "some_model": [
+          ""
+        ]
+      },
+      "footer_query": "|> aggregateWindow(every: 1d, fn: last, createEmpty: false) \n |> last()",
+      "object_unit": "V",
+      "object_min_thresh": null,
+      "object_max_thresh": null
+    },
+    "V2N": {
+      "object_name": "Voltage",
+      "zones": {
+        "Elmeasure Energy Meter(Distribution)": [
+          "V2N"
+        ],
+        "Elmeasure Energy Meter(Mains)": [
+          "V2N"
+        ],
+        "selec-306-C-D": [
+          "V2N"
+        ],
+        "selec-mrj4m-quad": [
+          "V2N"
+        ],
+        "Schneider-Conzerv-METSEEM6438H": [
+          ""
+        ],
+        "schneider-em6400ng": [
+          "V2"
+        ],
+        "Delta UPS": [
+          ""
+        ],
+        "some_model": [
+          ""
+        ]
+      },
+      "footer_query": "|> aggregateWindow(every: 1d, fn: last, createEmpty: false) \n |> last()",
+      "object_unit": "V",
+      "object_min_thresh": null,
+      "object_max_thresh": null
+    },
+    "V3N": {
+      "object_name": "Voltage",
+      "zones": {
+        "Elmeasure Energy Meter(Distribution)": [
+          "V3N"
+        ],
+        "Elmeasure Energy Meter(Mains)": [
+          "V3N"
+        ],
+        "selec-306-C-D": [
+          "V3N"
+        ],
+        "selec-mrj4m-quad": [
+          "V3N"
+        ],
+        "Schneider-Conzerv-METSEEM6438H": [
+          ""
+        ],
+        "schneider-em6400ng": [
+          "V3"
+        ],
+        "Delta UPS": [
+          ""
+        ],
+        "some_model": [
+          ""
+        ]
+      },
+      "footer_query": "|> aggregateWindow(every: 1d, fn: last, createEmpty: false) \n |> last()",
+      "object_unit": "V",
+      "object_min_thresh": null,
+      "object_max_thresh": null
+    },
+    "AVLN": {
+      "object_name": "Voltage",
+      "zones": {
+        "Elmeasure Energy Meter(Distribution)": [
+          "AVLN"
+        ],
+        "Elmeasure Energy Meter(Mains)": [
+          "V1N, V2N, V3N"
+        ],
+        "selec-306-C-D": [
+          ""
+        ],
+        "selec-mrj4m-quad": [
+          ""
+        ],
+        "Schneider-Conzerv-METSEEM6438H": [
+          ""
+        ],
+        "schneider-em6400ng": [
+          "V1, V2, V3"
+        ],
+        "Delta UPS": [
+          ""
+        ],
+        "some_model": [
+          ""
+        ]
+      },
+      "footer_query": "|> aggregateWindow(every: 1d, fn: last, createEmpty: false) \n |> last()",
+      "object_unit": "V",
+      "object_min_thresh": null,
+      "object_max_thresh": null
+    },
+    "POWER_FACTOR": {
+      "object_name": "Power Factor",
+      "zones": {
+        "Elmeasure Energy Meter(Distribution)": [
+          "APF"
+        ],
+        "Elmeasure Energy Meter(Mains)": [
+          "APF"
+        ],
+        "selec-306-C-D": [
+          "APF"
+        ],
+        "selec-mrj4m-quad": [
+          "APF"
+        ],
+        "Schneider-Conzerv-METSEEM6438H": [
+          "APF"
+        ],
+        "schneider-em6400ng": [
+          "APF"
+        ],
+        "Delta UPS": [
+          ""
+        ],
+        "some_model": [
+          ""
+        ]
+      },
+      "footer_query": "|> filter(fn: (r) =>  r._value > 0.85, onEmpty: \"keep\") \n  |> aggregateWindow(every: 1mo, fn: mean, createEmpty: false)  \n |> mean()",
+      "object_unit": null,
+      "object_min_thresh": null,
+      "object_max_thresh": null
+    },
+    "ENERGY_KWH": {
+      "object_name": "KWH",
+      "zones": {
+        "Elmeasure Energy Meter(Distribution)": [
+          "WHIMP"
+        ],
+        "Elmeasure Energy Meter(Mains)": [
+          "WHIMP"
+        ],
+        "selec-306-C-D": [
+          "KWH"
+        ],
+        "selec-mrj4m-quad": [
+          "TKWH"
+        ],
+        "Schneider-Conzerv-METSEEM6438H": [
+          "KWHEXP"
+        ],
+        "schneider-em6400ng": [
+          "KWH"
+        ],
+        "Delta UPS": [
+          ""
+        ],
+        "some_model": [
+          ""
+        ]
+      },
+      "footer_query": "|> aggregateWindow(every: 1mo, fn: spread, createEmpty: false)  \n|> sum()",
+      "object_unit": "kW",
+      "object_min_thresh": null,
+      "object_max_thresh": null
+    },
+    "Feel_Temp": {
+      "object_name": "Temperature",
+      "zones": {
+        "Elmeasure Energy Meter(Distribution)": [
+          ""
+        ],
+        "Elmeasure Energy Meter(Mains)": [
+          ""
+        ],
+        "selec-306-C-D": [
+          ""
+        ],
+        "selec-mrj4m-quad": [
+          ""
+        ],
+        "Schneider-Conzerv-METSEEM6438H": [
+          ""
+        ],
+        "schneider-em6400ng": [
+          ""
+        ],
+        "Delta UPS": [
+          ""
+        ],
+        "some_model": [
+          ""
+        ]
+      },
+      "footer_query": "|> filter(fn: (r) => r._value > 0 and r._value < 150, onEmpty: \"keep\")  \n|> group(columns: [\"device_code\"]) \n |> aggregateWindow(every: 1d, fn: mean, createEmpty: false)",
+      "object_unit": "\u00b0C",
+      "object_min_thresh": null,
+      "object_max_thresh": null
+    },
+    "ENERGY_MAX_KW": {
+      "object_name": "Energy Max KW",
+      "zones": {
+        "Elmeasure Energy Meter(Distribution)": [
+          "TKW"
+        ],
+        "Elmeasure Energy Meter(Mains)": [
+          "TKW"
+        ],
+        "selec-306-C-D": [
+          "TKW"
+        ],
+        "selec-mrj4m-quad": [
+          "TKW"
+        ],
+        "Schneider-Conzerv-METSEEM6438H": [
+          "TKW"
+        ],
+        "schneider-em6400ng": [
+          "TKW"
+        ],
+        "Delta UPS": [
+          ""
+        ],
+        "some_model": [
+          ""
+        ]
+      },
+      "footer_query": "|> max()  \n|> map(fn: (r) => ({ r with _value: r._value / 1000.0 }))",
+      "object_unit": "kW",
+      "object_min_thresh": null,
+      "object_max_thresh": null
+    },
+    "RKVA": {
+      "object_name": "",
+      "zones": {
+        "Elmeasure Energy Meter(Distribution)": [
+          ""
+        ],
+        "Elmeasure Energy Meter(Mains)": [
+          ""
+        ],
+        "selec-306-C-D": [
+          ""
+        ],
+        "selec-mrj4m-quad": [
+          ""
+        ],
+        "Schneider-Conzerv-METSEEM6438H": [
+          ""
+        ],
+        "schneider-em6400ng": [
+          ""
+        ],
+        "Delta UPS": [
+          "RKVA"
+        ],
+        "some_model": [
+          ""
+        ]
+      },
+      "footer_query": "|> aggregateWindow(every: 1d, fn: last, createEmpty: false) \n |> last()  \n |> map(fn: (r) => ({ r with _value: r._value / 100.0 }))",
+      "object_unit": "kVA",
+      "object_min_thresh": null,
+      "object_max_thresh": null
+    },
+    "BATTVOLT": {
+      "object_name": "",
+      "zones": {
+        "Elmeasure Energy Meter(Distribution)": [
+          ""
+        ],
+        "Elmeasure Energy Meter(Mains)": [
+          ""
+        ],
+        "selec-306-C-D": [
+          ""
+        ],
+        "selec-mrj4m-quad": [
+          ""
+        ],
+        "Schneider-Conzerv-METSEEM6438H": [
+          ""
+        ],
+        "schneider-em6400ng": [
+          ""
+        ],
+        "Delta UPS": [
+          "BATTVOLT"
+        ],
+        "some_model": [
+          "BATV"
+        ]
+      },
+      "footer_query": "|> aggregateWindow(every: 1d, fn: last, createEmpty: false) \n |> mean()",
+      "object_unit": "V",
+      "object_min_thresh": null,
+      "object_max_thresh": null
+    },
+    "PLOAD1": {
+      "object_name": "",
+      "zones": {
+        "Elmeasure Energy Meter(Distribution)": [
+          ""
+        ],
+        "Elmeasure Energy Meter(Mains)": [
+          ""
+        ],
+        "selec-306-C-D": [
+          ""
+        ],
+        "selec-mrj4m-quad": [
+          ""
+        ],
+        "Schneider-Conzerv-METSEEM6438H": [
+          ""
+        ],
+        "schneider-em6400ng": [
+          ""
+        ],
+        "Delta UPS": [
+          "PLOAD1"
+        ],
+        "some_model": [
+          "PLOAD"
+        ]
+      },
+      "footer_query": "|> aggregateWindow(every: 1d, fn: last, createEmpty: false) \n |> mean()",
+      "object_unit": "V",
+      "object_min_thresh": null,
+      "object_max_thresh": null
+    },
+    "PLOAD2": {
+      "object_name": "",
+      "zones": {
+        "Elmeasure Energy Meter(Distribution)": [
+          ""
+        ],
+        "Elmeasure Energy Meter(Mains)": [
+          ""
+        ],
+        "selec-306-C-D": [
+          ""
+        ],
+        "selec-mrj4m-quad": [
+          ""
+        ],
+        "Schneider-Conzerv-METSEEM6438H": [
+          ""
+        ],
+        "schneider-em6400ng": [
+          ""
+        ],
+        "Delta UPS": [
+          "PLOAD2"
+        ],
+        "some_model": [
+          ""
+        ]
+      },
+      "footer_query": "|> aggregateWindow(every: 1d, fn: last, createEmpty: false) \n |> mean()",
+      "object_unit": "V",
+      "object_min_thresh": null,
+      "object_max_thresh": null
+    },
+    "PLOAD3": {
+      "object_name": "",
+      "zones": {
+        "Elmeasure Energy Meter(Distribution)": [
+          ""
+        ],
+        "Elmeasure Energy Meter(Mains)": [
+          ""
+        ],
+        "selec-306-C-D": [
+          ""
+        ],
+        "selec-mrj4m-quad": [
+          ""
+        ],
+        "Schneider-Conzerv-METSEEM6438H": [
+          ""
+        ],
+        "schneider-em6400ng": [
+          ""
+        ],
+        "Delta UPS": [
+          "PLOAD3"
+        ],
+        "some_model": [
+          ""
+        ]
+      },
+      "footer_query": "|> aggregateWindow(every: 1d, fn: last, createEmpty: false) \n |> mean()",
+      "object_unit": "V",
+      "object_min_thresh": null,
+      "object_max_thresh": null
+    },
+    "DG_KWH": {
+      "object_name": "DG KWH",
+      "zones": {
+        "Elmeasure Energy Meter(Distribution)": [
+          "WHEXP"
+        ],
+        "Elmeasure Energy Meter(Mains)": [
+          "WHEXP"
+        ],
+        "selec-306-C-D": [
+          "DKWH"
+        ],
+        "selec-mrj4m-quad": [
+          "DKWH"
+        ],
+        "Schneider-Conzerv-METSEEM6438H": [
+          "KWHIMP"
+        ],
+        "schneider-em6400ng": [
+          ""
+        ],
+        "Delta UPS": [
+          ""
+        ],
+        "some_model": [
+          ""
+        ]
+      },
+      "footer_query": "|> aggregateWindow(every: 1d, fn: last, createEmpty: false) \n  |> difference(nonNegative: false, columns: [\"_value\"])  \n |> sum()",
+      "object_unit": "kWh",
+      "object_min_thresh": null,
+      "object_max_thresh": null
+    },
+    "UPS_HIGH_USAGE": {
+      "object_name": "UPS Highest Usage",
+      "zones": {
+        "Elmeasure Energy Meter(Distribution)": [
+          ""
+        ],
+        "Elmeasure Energy Meter(Mains)": [
+          ""
+        ],
+        "selec-306-C-D": [
+          ""
+        ],
+        "selec-mrj4m-quad": [
+          ""
+        ],
+        "Schneider-Conzerv-METSEEM6438H": [
+          ""
+        ],
+        "schneider-em6400ng": [
+          ""
+        ],
+        "Delta UPS": [
+          "PLOAD"
+        ],
+        "some_model": [
+          "PLOAD"
+        ]
+      },
+      "footer_query": "|> filter(fn: (r) => r._value > 0, onEmpty: \"keep\") \n  |> aggregateWindow(every: 1d, fn: max, createEmpty: false) \n  |> map(fn: (r) => ({ r with _value: r._value * 80.0 / 100.0}))",
+      "object_unit": null,
+      "object_min_thresh": null,
+      "object_max_thresh": null
+    },
+    "UPS_AVG_USAGE": {
+      "object_name": "UPS Average Usage",
+      "zones": {
+        "Elmeasure Energy Meter(Distribution)": [
+          ""
+        ],
+        "Elmeasure Energy Meter(Mains)": [
+          ""
+        ],
+        "selec-306-C-D": [
+          ""
+        ],
+        "selec-mrj4m-quad": [
+          ""
+        ],
+        "Schneider-Conzerv-METSEEM6438H": [
+          ""
+        ],
+        "schneider-em6400ng": [
+          ""
+        ],
+        "Delta UPS": [
+          "PLOAD"
+        ],
+        "some_model": [
+          "PLOAD"
+        ]
+      },
+      "footer_query": "|> filter(fn: (r) => r._value > 0, onEmpty: \"keep\") \n  |> aggregateWindow(every: 1d, fn: mean, createEmpty: false) \n  |> map(fn: (r) => ({ r with _value: r._value * 80.0 / 100.0}))",
+      "object_unit": null,
+      "object_min_thresh": null,
+      "object_max_thresh": null
+    }
+  },
+  "MAIN_ENERGY_REPORT_MONTHLY": {
+    "ENERGY_KWH": {
+      "object_name": "KWH",
+      "zones": {
+        "Elmeasure Energy Meter(Distribution)": [
+          "WHIMP"
+        ],
+        "Elmeasure Energy Meter(Mains)": [
+          "WHIMP"
+        ],
+        "selec-306-C-D": [
+          "KWH"
+        ],
+        "selec-mrj4m-quad": [
+          "TKWH"
+        ],
+        "Schneider-Conzerv-METSEEM6438H": [
+          "KWHEXP"
+        ],
+        "schneider-em6400ng": [
+          "KWH"
+        ],
+        "Delta UPS": [
+          ""
+        ],
+        "some_model": [
+          ""
+        ],
+        "sedemac_gc1111": [
+          ""
+        ]
+      },
+      "footer_query": "|> aggregateWindow(every: 1mo, fn: spread, createEmpty: false)  \n|> sum()",
+      "object_unit": "kW",
+      "object_min_thresh": null,
+      "object_max_thresh": null
+    },
+    "ENERGY_MAX_KW": {
+      "object_name": "Energy Max KW",
+      "zones": {
+        "Elmeasure Energy Meter(Distribution)": [
+          "TKW"
+        ],
+        "Elmeasure Energy Meter(Mains)": [
+          "TKW"
+        ],
+        "selec-306-C-D": [
+          "TKW"
+        ],
+        "selec-mrj4m-quad": [
+          "TKW"
+        ],
+        "Schneider-Conzerv-METSEEM6438H": [
+          "TKW"
+        ],
+        "schneider-em6400ng": [
+          "TKW"
+        ],
+        "Delta UPS": [
+          ""
+        ],
+        "some_model": [
+          ""
+        ],
+        "sedemac_gc1111": [
+          ""
+        ]
+      },
+      "footer_query": "|> max()  \n|> map(fn: (r) => ({ r with _value: r._value / 1000.0 }))",
+      "object_unit": "kW",
+      "object_min_thresh": null,
+      "object_max_thresh": null
+    },
+    "POWER_FACTOR": {
+      "object_name": "Power Factor",
+      "zones": {
+        "Elmeasure Energy Meter(Distribution)": [
+          "APF"
+        ],
+        "Elmeasure Energy Meter(Mains)": [
+          "APF"
+        ],
+        "selec-306-C-D": [
+          ""
+        ],
+        "selec-mrj4m-quad": [
+          ""
+        ],
+        "Schneider-Conzerv-METSEEM6438H": [
+          "APF"
+        ],
+        "schneider-em6400ng": [
+          "APF"
+        ],
+        "Delta UPS": [
+          ""
+        ],
+        "some_model": [
+          ""
+        ],
+        "sedemac_gc1111": [
+          ""
+        ]
+      },
+      "footer_query": "|> filter(fn: (r) =>  r._value > 0.85, onEmpty: \"keep\") \n  |> aggregateWindow(every: 1mo, fn: mean, createEmpty: false)",
+      "object_unit": null,
+      "object_min_thresh": null,
+      "object_max_thresh": null
+    },
+    "MAX_KWH": {
+      "object_name": "Max KW",
+      "zones": {
+        "Elmeasure Energy Meter(Distribution)": [
+          "TKW"
+        ],
+        "Elmeasure Energy Meter(Mains)": [
+          "TKW"
+        ],
+        "selec-306-C-D": [
+          "TKW"
+        ],
+        "selec-mrj4m-quad": [
+          "TKW"
+        ],
+        "Schneider-Conzerv-METSEEM6438H": [
+          "TKW"
+        ],
+        "schneider-em6400ng": [
+          "TKW"
+        ],
+        "Delta UPS": [
+          ""
+        ],
+        "some_model": [
+          ""
+        ],
+        "sedemac_gc1111": [
+          ""
+        ]
+      },
+      "footer_query": "|> max()  \n|> map(fn: (r) => ({ r with _value: r._value / 1000.0 }))",
+      "object_unit": "kW",
+      "object_min_thresh": null,
+      "object_max_thresh": null
+    },
+    "RKVA": {
+      "object_name": "",
+      "zones": {
+        "Elmeasure Energy Meter(Distribution)": [
+          ""
+        ],
+        "Elmeasure Energy Meter(Mains)": [
+          ""
+        ],
+        "selec-306-C-D": [
+          ""
+        ],
+        "selec-mrj4m-quad": [
+          ""
+        ],
+        "Schneider-Conzerv-METSEEM6438H": [
+          ""
+        ],
+        "schneider-em6400ng": [
+          ""
+        ],
+        "Delta UPS": [
+          "RKVA"
+        ],
+        "some_model": [
+          ""
+        ],
+        "sedemac_gc1111": [
+          ""
+        ]
+      },
+      "footer_query": "|> aggregateWindow(every: 1d, fn: last, createEmpty: false) \n |> last()  \n |> map(fn: (r) => ({ r with _value: r._value / 100.0 }))",
+      "object_unit": "kVA",
+      "object_min_thresh": null,
+      "object_max_thresh": null
+    },
+    "DG_RUN_HOURS": {
+      "object_name": "Run Hours",
+      "zones": {
+        "Elmeasure Energy Meter(Distribution)": [
+          ""
+        ],
+        "Elmeasure Energy Meter(Mains)": [
+          ""
+        ],
+        "selec-306-C-D": [
+          ""
+        ],
+        "selec-mrj4m-quad": [
+          ""
+        ],
+        "Schneider-Conzerv-METSEEM6438H": [
+          ""
+        ],
+        "schneider-em6400ng": [
+          ""
+        ],
+        "Delta UPS": [
+          ""
+        ],
+        "some_model": [
+          ""
+        ],
+        "sedemac_gc1111": [
+          "HRS"
+        ]
+      },
+      "footer_query": "",
+      "object_unit": null,
+      "object_min_thresh": null,
+      "object_max_thresh": null
+    },
+    "DG_KWH": {
+      "object_name": "DG KWH",
+      "zones": {
+        "Elmeasure Energy Meter(Distribution)": [
+          ""
+        ],
+        "Elmeasure Energy Meter(Mains)": [
+          ""
+        ],
+        "selec-306-C-D": [
+          ""
+        ],
+        "selec-mrj4m-quad": [
+          ""
+        ],
+        "Schneider-Conzerv-METSEEM6438H": [
+          ""
+        ],
+        "schneider-em6400ng": [
+          ""
+        ],
+        "Delta UPS": [
+          ""
+        ],
+        "some_model": [
+          ""
+        ],
+        "sedemac_gc1111": [
+          "KWH"
+        ]
+      },
+      "footer_query": "|> aggregateWindow(every: 10m, fn: last, createEmpty: false) \n|> difference(nonNegative: false, columns: [\"_value\"]) \n|> map(fn: (r) => ({ r with _value: if r._value < 0 or r._value > 1000 then float(v:0) else float(v: \"${r._value}\"),})) \n|> aggregateWindow(every: 1mo, fn: sum, createEmpty: false) \n|> group(columns: [\"panel_no\"] )",
+      "object_unit": "kWh",
+      "object_min_thresh": null,
+      "object_max_thresh": null
+    },
+    "Feel_Temp": {
+      "object_name": "Temperature",
+      "zones": {
+        "Elmeasure Energy Meter(Distribution)": [
+          ""
+        ],
+        "Elmeasure Energy Meter(Mains)": [
+          ""
+        ],
+        "selec-306-C-D": [
+          ""
+        ],
+        "selec-mrj4m-quad": [
+          ""
+        ],
+        "Schneider-Conzerv-METSEEM6438H": [
+          ""
+        ],
+        "schneider-em6400ng": [
+          ""
+        ],
+        "Delta UPS": [
+          ""
+        ],
+        "some_model": [
+          ""
+        ],
+        "sedemac_gc1111": [
+          ""
+        ]
+      },
+      "footer_query": "|> filter(fn: (r) => r._value > 0 and r._value < 150, onEmpty: \"keep\")  \n|> group(columns: [\"device_code\"]) \n |> aggregateWindow(every: 1mo, fn: mean, createEmpty: false)",
+      "object_unit": "\u00b0C",
+      "object_min_thresh": null,
+      "object_max_thresh": null
+    },
+    "HIGH_MAIN_VOLT_COUNT": {
+      "object_name": "High Mains Voltage Count",
+      "zones": {
+        "Elmeasure Energy Meter(Distribution)": [
+          "AVLN"
+        ],
+        "Elmeasure Energy Meter(Mains)": [
+          "AVLN"
+        ],
+        "selec-306-C-D": [
+          "V1N, V2N, V3N"
+        ],
+        "selec-mrj4m-quad": [
+          "V1N, V2N, V3N"
+        ],
+        "Schneider-Conzerv-METSEEM6438H": [
+          "AVLN"
+        ],
+        "schneider-em6400ng": [
+          "V1, V2, V3"
+        ],
+        "Delta UPS": [
+          ""
+        ],
+        "some_model": [
+          ""
+        ],
+        "sedemac_gc1111": [
+          ""
+        ]
+      },
+      "footer_query": "|> aggregateWindow(every: 10m, fn: last, createEmpty: false) \n  |> filter(fn: (r) => r._value > 260, onEmpty: \"keep\") \n  |> count(column: \"_value\")",
+      "object_unit": "V",
+      "object_min_thresh": null,
+      "object_max_thresh": null
+    },
+    "LOW_MAIN_VOLT_COUNT": {
+      "object_name": "Low Mains Voltage Count",
+      "zones": {
+        "Elmeasure Energy Meter(Distribution)": [
+          "AVLN"
+        ],
+        "Elmeasure Energy Meter(Mains)": [
+          "AVLN"
+        ],
+        "selec-306-C-D": [
+          "V1N, V2N, V3N"
+        ],
+        "selec-mrj4m-quad": [
+          "V1N, V2N, V3N"
+        ],
+        "Schneider-Conzerv-METSEEM6438H": [
+          "AVLN"
+        ],
+        "schneider-em6400ng": [
+          "V1, V2, V3"
+        ],
+        "Delta UPS": [
+          ""
+        ],
+        "some_model": [
+          ""
+        ],
+        "sedemac_gc1111": [
+          ""
+        ]
+      },
+      "footer_query": "|> aggregateWindow(every: 10m, fn: last, createEmpty: false) \n  |> filter(fn: (r) => r._value < 180, onEmpty: \"keep\") \n  |> count(column: \"_value\")",
+      "object_unit": "V",
+      "object_min_thresh": null,
+      "object_max_thresh": null
+    },
+    "P_F_COUNT": {
+      "object_name": "P.F Alert Count",
+      "zones": {
+        "Elmeasure Energy Meter(Distribution)": [
+          "IV1, IV2, IV3"
+        ],
+        "Elmeasure Energy Meter(Mains)": [
+          "IV1, IV2, IV3"
+        ],
+        "selec-306-C-D": [
+          "IV1, IV2, IV3"
+        ],
+        "selec-mrj4m-quad": [
+          "IV1, IV2, IV3"
+        ],
+        "Schneider-Conzerv-METSEEM6438H": [
+          "IV1, IV2, IV3"
+        ],
+        "schneider-em6400ng": [
+          "IV1, IV2, IV3"
+        ],
+        "Delta UPS": [
+          ""
+        ],
+        "some_model": [
+          ""
+        ],
+        "sedemac_gc1111": [
+          ""
+        ]
+      },
+      "footer_query": "|> hourSelection(start: 8, stop: 18) \n  |> filter(fn: (r) => r._value > -0.85 and r._value < 0.85, onEmpty: \"keep\") \n  |> aggregateWindow(every: 10m, fn: count, createEmpty: false) \n  |> sum(column: \"_value\") \n",
+      "object_unit": "V",
+      "object_min_thresh": null,
+      "object_max_thresh": null
+    },
+    "UPS_BATT_ALERT": {
+      "object_name": "UPS Battery Alert",
+      "zones": {
+        "Elmeasure Energy Meter(Distribution)": [
+          ""
+        ],
+        "Elmeasure Energy Meter(Mains)": [
+          ""
+        ],
+        "selec-306-C-D": [
+          ""
+        ],
+        "selec-mrj4m-quad": [
+          ""
+        ],
+        "Schneider-Conzerv-METSEEM6438H": [
+          ""
+        ],
+        "schneider-em6400ng": [
+          ""
+        ],
+        "Delta UPS": [
+          "BATTVOLT"
+        ],
+        "some_model": [
+          "BATV"
+        ],
+        "sedemac_gc1111": [
+          ""
+        ]
+      },
+      "footer_query": "|> aggregateWindow(every: 10m, fn: last, createEmpty: false) \n  |> filter(fn: (r) => r._value < 221, onEmpty: \"keep\") \n  |> count(column: \"_value\")",
+      "object_unit": null,
+      "object_min_thresh": null,
+      "object_max_thresh": null
+    },
+    "UPS_BATT_VOLT": {
+      "object_name": "UPS Battery Voltage",
+      "zones": {
+        "Elmeasure Energy Meter(Distribution)": [
+          ""
+        ],
+        "Elmeasure Energy Meter(Mains)": [
+          ""
+        ],
+        "selec-306-C-D": [
+          ""
+        ],
+        "selec-mrj4m-quad": [
+          ""
+        ],
+        "Schneider-Conzerv-METSEEM6438H": [
+          ""
+        ],
+        "schneider-em6400ng": [
+          ""
+        ],
+        "Delta UPS": [
+          "BATTVOLT"
+        ],
+        "some_model": [
+          "BATV"
+        ],
+        "sedemac_gc1111": [
+          ""
+        ]
+      },
+      "footer_query": "|> aggregateWindow(every: 1mo, fn: last, createEmpty: false)",
+      "object_unit": "V",
+      "object_min_thresh": null,
+      "object_max_thresh": null
+    },
+    "UPS_HIGH_USAGE": {
+      "object_name": "UPS Highest Usage",
+      "zones": {
+        "Elmeasure Energy Meter(Distribution)": [
+          ""
+        ],
+        "Elmeasure Energy Meter(Mains)": [
+          ""
+        ],
+        "selec-306-C-D": [
+          ""
+        ],
+        "selec-mrj4m-quad": [
+          ""
+        ],
+        "Schneider-Conzerv-METSEEM6438H": [
+          ""
+        ],
+        "schneider-em6400ng": [
+          ""
+        ],
+        "Delta UPS": [
+          "PLOAD"
+        ],
+        "some_model": [
+          "PLOAD"
+        ],
+        "sedemac_gc1111": [
+          ""
+        ]
+      },
+      "footer_query": "|> filter(fn: (r) => r._value > 0, onEmpty: \"keep\") \n  |> aggregateWindow(every: 1mo, fn: max, createEmpty: false) \n  |> map(fn: (r) => ({ r with _value: r._value * 80.0 / 100.0}))",
+      "object_unit": null,
+      "object_min_thresh": null,
+      "object_max_thresh": null
+    },
+    "UPS_AVG_USAGE": {
+      "object_name": "UPS Average Usage",
+      "zones": {
+        "Elmeasure Energy Meter(Distribution)": [
+          ""
+        ],
+        "Elmeasure Energy Meter(Mains)": [
+          ""
+        ],
+        "selec-306-C-D": [
+          ""
+        ],
+        "selec-mrj4m-quad": [
+          ""
+        ],
+        "Schneider-Conzerv-METSEEM6438H": [
+          ""
+        ],
+        "schneider-em6400ng": [
+          ""
+        ],
+        "Delta UPS": [
+          "PLOAD"
+        ],
+        "some_model": [
+          "PLOAD"
+        ],
+        "sedemac_gc1111": [
+          ""
+        ]
+      },
+      "footer_query": "|> filter(fn: (r) => r._value > 0, onEmpty: \"keep\") \n  |> aggregateWindow(every: 1mo, fn: mean, createEmpty: false) \n  |> map(fn: (r) => ({ r with _value: r._value * 80.0 / 100.0}))",
+      "object_unit": null,
+      "object_min_thresh": null,
+      "object_max_thresh": null
+    }
+  },
+  "CO2": {
+    "DEVICE_LEVEL_C02": {
+      "object_name": "Devices C02",
+      "zones": [],
+      "footer_query": "|> last()",
+      "object_unit": null,
+      "object_min_thresh": null,
+      "object_max_thresh": null
+    }
+  },
+  "TEMPERATURE": {
+    "FLOOR_FEEL_TEMPERATURE": {
+      "object_name": "Floor feel temperature",
+      "zones": [],
+      "footer_query": "|> filter(fn: (r) => r._value > 15 and r._value < 36, onEmpty: \"keep\") \n|> group(columns: [\"_measurement\"]) \n|> mean(column: \"_value\")",
+      "object_unit": "\u00b0C",
+      "object_min_thresh": null,
+      "object_max_thresh": null
+    },
+    "DEVICE_LEVEL_TEMP": {
+      "object_name": "Devices Temperature",
+      "zones": [],
+      "footer_query": "|> filter(fn: (r) => r._value > 15 and r._value < 36, onEmpty: \"keep\")  \n |> last()",
+      "object_unit": "\u00b0C",
+      "object_min_thresh": null,
+      "object_max_thresh": null
+    }
+  },
+  "FIRE": {
+    "PANEL_STATUS": {
+      "object_name": "Panel Status",
+      "zones": [],
+      "footer_query": "|> last()",
+      "object_unit": null,
+      "object_min_thresh": null,
+      "object_max_thresh": null
+    }
+  }
+}
