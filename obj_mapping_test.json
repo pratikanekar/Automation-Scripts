@@ -184,7 +184,9 @@
       "object_name": "UPS Load Phase-wise",
       "zones": {
         "Delta UPS": [
-          "PLOAD1, PLOAD2, PLOAD3"
+          "PLOAD1",
+          "PLOAD2",
+          "PLOAD3"
         ],
         "some_model": [
           "PLOAD"
@@ -199,7 +201,9 @@
       "object_name": "UPS Percent",
       "zones": {
         "Delta UPS": [
-          "PLOAD1, PLOAD2, PLOAD3"
+          "PLOAD1",
+          "PLOAD2",
+          "PLOAD3"
         ],
         "some_model": [
           "PLOAD"
@@ -279,16 +283,22 @@
       "object_name": "Run Hours VS Fuel Level VS KWH",
       "zones": {
         "sedemac_gc1111": [
-          "HRS, KWH, LEVEL"
+          "HRS",
+          "KWH",
+          "LEVEL"
         ],
         "DG_fuel_sensor_DHL": [
           "FL"
         ],
         "Deepsea-4520-MK11": [
-          "ERT, KWH, FL"
+          "ERT",
+          "KWH",
+          "FL"
         ],
         "DG SGC 120/121": [
-          "HRS, DKWH, LEVEL"
+          "HRS",
+          "DKWH",
+          "LEVEL"
         ]
       },
       "footer_query": "|> aggregateWindow(every: 1h, fn: last, createEmpty: false)",
@@ -644,7 +654,9 @@
           "TKW"
         ],
         "socomec-multis-lm35": [
-          "kW1, kW2, kW3"
+          "kW1",
+          "kW2",
+          "kW3"
         ],
         "trinity-tinypro-6": [
           "TKW"
@@ -656,7 +668,9 @@
           "TKW"
         ],
         "DT-108": [
-          "KWH1, KWH2, KWH3"
+          "KWH1",
+          "KWH2",
+          "KWH3"
         ],
         "LG5310": [
           "TKW"
@@ -701,7 +715,9 @@
           "TKW"
         ],
         "socomec-multis-lm35": [
-          "kW1, kW2, kW3"
+          "kW1",
+          "kW2",
+          "kW3"
         ],
         "trinity-tinypro-6": [
           "TKW"
@@ -713,7 +729,9 @@
           "TKW"
         ],
         "DT-108": [
-          "KWH1, KWH2, KWH3"
+          "KWH1",
+          "KWH2",
+          "KWH3"
         ],
         "LG5310": [
           "TKW"
@@ -740,52 +758,82 @@
       "object_name": "Phase Wise Load",
       "zones": {
         "Elmeasure Energy Meter(Distribution)": [
-          "I1, I2, I3"
+          "I1",
+          "I2",
+          "I3"
         ],
         "Elmeasure Energy Meter(Mains)": [
-          "I1, I2, I3"
+          "I1",
+          "I2",
+          "I3"
         ],
         "selec-306-C-D": [
-          "I1, I2, I3"
+          "I1",
+          "I2",
+          "I3"
         ],
         "selec-mrj4m-quad": [
-          "I1, I2, I3"
+          "I1",
+          "I2",
+          "I3"
         ],
         "Schneider-Conzerv-METSEEM6438H": [
           ""
         ],
         "schneider-em6400ng": [
-          "I1, I2, I3"
+          "I1",
+          "I2",
+          "I3"
         ],
         "socomec-multis-lm35": [
-          "I1, I2, I3"
+          "I1",
+          "I2",
+          "I3"
         ],
         "trinity-tinypro-6": [
-          "I1, I2, I3"
+          "I1",
+          "I2",
+          "I3"
         ],
         "selec-mfm384": [
-          "I1, I2, I3"
+          "I1",
+          "I2",
+          "I3"
         ],
         "selec-mfm384d": [
-          "I1, I2, I3"
+          "I1",
+          "I2",
+          "I3"
         ],
         "DT-108": [
-          "I1, I2, I3"
+          "I1",
+          "I2",
+          "I3"
         ],
         "LG5310": [
-          "I1, I2, I3"
+          "I1",
+          "I2",
+          "I3"
         ],
         "ELite 440": [
-          "I1, I2, I3"
+          "I1",
+          "I2",
+          "I3"
         ],
         "ESP ModBus": [
-          "I1, I2, I3"
+          "I1",
+          "I2",
+          "I3"
         ],
         "Selec-EM4M-3P-C-100A": [
-          "I1, I2, I3"
+          "I1",
+          "I2",
+          "I3"
         ],
         "ELite 500": [
-          "I1, I2, I3"
+          "I1",
+          "I2",
+          "I3"
         ]
       },
       "footer_query": "|> last()",
@@ -797,52 +845,83 @@
       "object_name": "Voltage",
       "zones": {
         "Elmeasure Energy Meter(Distribution)": [
-          "V1N, V2N, V3N, AVLN"
+          "V1N",
+          "V2N",
+          "V3N",
+          "AVLN"
         ],
         "Elmeasure Energy Meter(Mains)": [
-          "V1N, V2N, V3N"
+          "V1N",
+          "V2N",
+          "V3N"
         ],
         "selec-306-C-D": [
-          "V1N, V2N, V3N"
+          "V1N",
+          "V2N",
+          "V3N"
         ],
         "selec-mrj4m-quad": [
-          "V1N, V2N, V3N"
+          "V1N",
+          "V2N",
+          "V3N"
         ],
         "Schneider-Conzerv-METSEEM6438H": [
           ""
         ],
         "schneider-em6400ng": [
-          "V1, V2, V3"
+          "V1",
+          "V2",
+          "V3"
         ],
         "socomec-multis-lm35": [
-          "V1N, V2N, V3N"
+          "V1N",
+          "V2N",
+          "V3N"
         ],
         "trinity-tinypro-6": [
-          "V1N, V2N, V3N"
+          "V1N",
+          "V2N",
+          "V3N"
         ],
         "selec-mfm384": [
-          "V1N, V2N, V3N"
+          "V1N",
+          "V2N",
+          "V3N"
         ],
         "selec-mfm384d": [
-          "V1N, V2N, V3N"
+          "V1N",
+          "V2N",
+          "V3N"
         ],
         "DT-108": [
-          "VLN1, VLN2, VLN3"
+          "VLN1",
+          "VLN2",
+          "VLN3"
         ],
         "LG5310": [
-          "V1N, V2N, V3N"
+          "V1N",
+          "V2N",
+          "V3N"
         ],
         "ELite 440": [
-          "V1N, V2N, V3N"
+          "V1N",
+          "V2N",
+          "V3N"
         ],
         "ESP ModBus": [
-          "V1N, V2N, V3N"
+          "V1N",
+          "V2N",
+          "V3N"
         ],
         "Selec-EM4M-3P-C-100A": [
-          "V1N, V2N, V3N"
+          "V1N",
+          "V2N",
+          "V3N"
         ],
         "ELite 500": [
-          "V1N, V2N, V3N"
+          "V1N",
+          "V2N",
+          "V3N"
         ]
       },
       "footer_query": "|> aggregateWindow(every: 1h, fn: last, createEmpty: false)",
@@ -1385,7 +1464,9 @@
           "TKW"
         ],
         "socomec-multis-lm35": [
-          "kW1, kW2, kW3"
+          "kW1",
+          "kW2",
+          "kW3"
         ],
         "trinity-tinypro-6": [
           "TKW"
@@ -1397,7 +1478,9 @@
           "TKW"
         ],
         "DT-108": [
-          "KWH1, KWH2, KWH3"
+          "KWH1",
+          "KWH2",
+          "KWH3"
         ],
         "LG5310": [
           "TKW"
@@ -1426,7 +1509,14 @@
       "object_name": "ON/OFF status",
       "zones": {
         "485 Based 8-IO": [
-          "IOIN1, IOIN2, IOIN3, IOIN4, IOIN5, IOIN6, IOIN7, IOIN8"
+          "IOIN1",
+          "IOIN2",
+          "IOIN3",
+          "IOIN4",
+          "IOIN5",
+          "IOIN6",
+          "IOIN7",
+          "IOIN8"
         ]
       },
       "footer_query": "|> aggregateWindow(every: 1d, fn: last, createEmpty: false) \n |> last()",
@@ -1732,10 +1822,15 @@
       "object_name": "Voltage",
       "zones": {
         "Elmeasure Energy Meter(Distribution)": [
-          "V1N, V2N, V3N, AVLN"
+          "V1N",
+          "V2N",
+          "V3N",
+          "AVLN"
         ],
         "Elmeasure Energy Meter(Mains)": [
-          "V1N, V2N, V3N"
+          "V1N",
+          "V2N",
+          "V3N"
         ],
         "selec-306-C-D": [
           ""
@@ -1747,7 +1842,9 @@
           ""
         ],
         "schneider-em6400ng": [
-          "V1, V2, V3"
+          "V1",
+          "V2",
+          "V3"
         ],
         "Delta UPS": [
           ""
@@ -1867,7 +1964,9 @@
           "AVLN"
         ],
         "Elmeasure Energy Meter(Mains)": [
-          "V1N, V2N, V3N"
+          "V1N",
+          "V2N",
+          "V3N"
         ],
         "selec-306-C-D": [
           ""
@@ -1879,7 +1978,9 @@
           ""
         ],
         "schneider-em6400ng": [
-          "V1, V2, V3"
+          "V1",
+          "V2",
+          "V3"
         ],
         "Delta UPS": [
           ""
@@ -2589,16 +2690,22 @@
           "AVLN"
         ],
         "selec-306-C-D": [
-          "V1N, V2N, V3N"
+          "V1N",
+          "V2N",
+          "V3N"
         ],
         "selec-mrj4m-quad": [
-          "V1N, V2N, V3N"
+          "V1N",
+          "V2N",
+          "V3N"
         ],
         "Schneider-Conzerv-METSEEM6438H": [
           "AVLN"
         ],
         "schneider-em6400ng": [
-          "V1, V2, V3"
+          "V1",
+          "V2",
+          "V3"
         ],
         "Delta UPS": [
           ""
@@ -2625,16 +2732,22 @@
           "AVLN"
         ],
         "selec-306-C-D": [
-          "V1N, V2N, V3N"
+          "V1N",
+          "V2N",
+          "V3N"
         ],
         "selec-mrj4m-quad": [
-          "V1N, V2N, V3N"
+          "V1N",
+          "V2N",
+          "V3N"
         ],
         "Schneider-Conzerv-METSEEM6438H": [
           "AVLN"
         ],
         "schneider-em6400ng": [
-          "V1, V2, V3"
+          "V1",
+          "V2",
+          "V3"
         ],
         "Delta UPS": [
           ""
@@ -2655,22 +2768,34 @@
       "object_name": "P.F Alert Count",
       "zones": {
         "Elmeasure Energy Meter(Distribution)": [
-          "IV1, IV2, IV3"
+          "IV1",
+          "IV2",
+          "IV3"
         ],
         "Elmeasure Energy Meter(Mains)": [
-          "IV1, IV2, IV3"
+          "IV1",
+          "IV2",
+          "IV3"
         ],
         "selec-306-C-D": [
-          "IV1, IV2, IV3"
+          "IV1",
+          "IV2",
+          "IV3"
         ],
         "selec-mrj4m-quad": [
-          "IV1, IV2, IV3"
+          "IV1",
+          "IV2",
+          "IV3"
         ],
         "Schneider-Conzerv-METSEEM6438H": [
-          "IV1, IV2, IV3"
+          "IV1",
+          "IV2",
+          "IV3"
         ],
         "schneider-em6400ng": [
-          "IV1, IV2, IV3"
+          "IV1",
+          "IV2",
+          "IV3"
         ],
         "Delta UPS": [
           ""

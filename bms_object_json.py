@@ -58,9 +58,17 @@ def read_excel_and_create_json(filename):
                         column_value = row[column_name]
 
                         if template_name not in zones_data:
-                            zones_data[template_name] = [column_value]
+                            zones_data[template_name] = []
                             if str(column_value).lower() == 'nan' or column_value is None:
                                 zones_data[template_name] = [""]
+                            elif ',' in column_value:
+                                # Split the column_value into individual values based on commas
+                                values = [val.strip() for val in column_value.split(',')]
+                                # Append each value separately to the list
+                                zones_data[template_name].extend(values)
+                            else:
+                                # If there are no commas, add the entire column_value as a single string
+                                zones_data[template_name] = [column_value]
                         else:
                             zones_data[template_name].append(column_value)
                             if str(column_value).lower() == 'nan' or column_value is None:
